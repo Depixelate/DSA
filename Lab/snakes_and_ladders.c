@@ -45,6 +45,8 @@ Square *get_square(Square *head, int index)
     {
         cur = cur->next;
     }
+
+    return cur;
 }
 
 void create_skip(Square *head, int start_num, int end_num)
@@ -78,7 +80,7 @@ int handle_roll()
         switch (roll)
         {
             case 0:
-                printf("You got 0, rolling again!");
+                printf("You got 0, rolling again!\n");
                 continue;
                 break;
             case 1:
@@ -87,14 +89,14 @@ int handle_roll()
             case 4:
             case 5:
             case 6:
-                printf("Moving %d spaces forward.", roll);
+                printf("Moving %d spaces forward.\n", roll);
                 return roll; 
                 break;
             case 7:
             case 8:
             case 9:
             case 10:
-                printf("Moving %d spaces backward.", 6 - roll);
+                printf("Moving %d spaces backward.\n", roll - 6);
                 return 6 - roll;
                 break;
         }
@@ -123,13 +125,14 @@ int main()
     create_board(num_squares, &head, &tail);
     bool inLoop = true;
     while(inLoop) {
+        printf("Now creating the snakes and ladders!(skips)\n");
         printf("Enter 1 to create a skip, 2 to quit: ");
         int op;
         fgets(buf, 4096, stdin);
         sscanf(buf, "%d", &op);
         switch (op) {
             case 1:
-                printf("Enter the starting and ending points: ");
+                printf("Enter the starting and ending points(<start> <end>): ");
                 int start_num, end_num;
                 fgets(buf, 4096, stdin);
                 sscanf(buf, "%d %d", &start_num, &end_num);
@@ -148,7 +151,7 @@ int main()
 
     int playerIndex = 1;
     while(true) {
-        printf("Player %d is on square %d\n", playerIndex+1, player_pos[playerIndex]->pos);
+        printf("\nPlayer %d is on square %d\n", playerIndex+1, player_pos[playerIndex]->pos);
         int change = handle_roll();
         if(change > 0) {
             for(int i = 0; i < change && player_pos[playerIndex]->pos != 100; i++) {
@@ -160,18 +163,20 @@ int main()
             }
         }
         int cur_pos = player_pos[playerIndex]->pos;
-        printf("Player %d is now on square %d\n", playerIndex+1, cur_pos);
+        printf("Player %d is now on square %d\n\n", playerIndex+1, cur_pos);
         Square *skip_square = player_pos[playerIndex]->skip;
         if(skip_square != NULL) {
             player_pos[playerIndex] = skip_square;
             if (skip_square->pos > cur_pos) {
-                printf("This Square is a SLIDE, player %d is now at square %d", playerIndex+1, skip_square->pos);
+                printf("This Square is a SLIDE, player %d is now at square %d\n", playerIndex+1, skip_square->pos);
             } else {
-                printf("This Square is a SNAKE, player %d is now at square %d", playerIndex+1, skip_square->pos);
+                printf("This Square is a SNAKE, player %d is now at square %d\n", playerIndex+1, skip_square->pos);
             }
         }
+        printf("\nPress Enter to continue: ");
+        fgets(buf, 4096, stdin);
         if(player_pos[playerIndex]->pos == 100) {
-            printf("Congrats, player %d, You've WON!", playerIndex+1);
+            printf("Congrats, player %d, You've WON!\n", playerIndex+1);
             break;
         }
         playerIndex += 1;
