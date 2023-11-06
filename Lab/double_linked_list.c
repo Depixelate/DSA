@@ -9,6 +9,8 @@ typedef struct Node {
 	const char *val;
 } Node;
 
+typedef struct 
+
 Node *tail(Node *any) {
 	while(any->next != NULL) {
 		any = any->next;
@@ -110,7 +112,7 @@ void print(Node *head) {
 }
 
 int main() {
-	Node *head = NULL;
+	Node *head = NULL, *tail = NULL;
 	Node *n1 = add_node(&head, "Hi!");
 	Node *n2 = add_node(&head, "How are you?");
 	Node *n3 = add_node(&head, "I am doing well...");

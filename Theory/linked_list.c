@@ -20,6 +20,7 @@ void free_list(Node *head)
 
 void print_list(Node *head)
 {
+    printf("-----LIST START--------\n");
     for (Node *cur = head; cur != NULL; cur = cur->next)
     {
         printf("%s\n", cur->val);
@@ -98,13 +99,18 @@ Node **search(Node *head, const char *val)
     return NULL;
 }
 
-// void reverse(Node **head) {
 
-//     while(*head != NULL) {
-//         Node *temp = *head;
 
-//     }
-// }
+void reverse(Node **head) {
+    Node *cur = *head, *prev = NULL;
+    while(cur != NULL) {
+        Node *temp = cur->next;
+        cur->next = prev;
+        prev = cur;
+        cur = temp;
+    }
+    *head = prev;
+}
 
 int main()
 {
@@ -112,6 +118,8 @@ int main()
     append(&head, "Hi");
     append(&head, "Hello");
     append(&head, "What's your name?");
+    print_list(head);
+    reverse(&head);
     print_list(head);
     free_list(head);
     return 0;
