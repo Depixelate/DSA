@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <time.h>
 #include <math.h>
+
 typedef struct Node {
     int val;
     struct Node *left;
@@ -14,6 +15,7 @@ Node *new_node(int val, Node *left, Node *right) {
     node->val = val;
     node->left = left;
     node->right = right;
+    return node;
 }
 
 bool is_bst(Node **root) {
@@ -66,6 +68,46 @@ Node **find(Node **root, int val) {
         }
     }
     return cur;
+}
+
+Node *get_ios(Node **root, int x) {
+    Node *r = *root;
+    Node *ios = NULL;
+    Node *cur = r;
+    while(cur != NULL && cur->val != x) {
+        if(x < cur->val) {
+            ios = cur;
+            cur = cur->left;
+        } else {
+            cur = cur->right;
+        }
+    }
+
+    if(cur == NULL) return ios;
+    
+    if(cur->right == NULL) return ios;
+    ios = *min_node(&(cur->right));
+    return ios;
+}
+
+Node *get_iop(Node **root, int x) {
+    Node *r = *root;
+    Node *iop = NULL;
+    Node *cur = r;
+    while(cur != NULL && cur->val != x) {
+        if(x > cur->val) {
+            iop = cur;
+            cur = cur->right;
+        } else {
+            cur = cur->left;
+        }
+    }
+
+    if(cur == NULL) return iop;
+
+    if(cur->right == NULL) return iop;
+    iop = *max_node(&(cur->left));
+    return iop;
 }
 
 bool contains(Node **root, int val) {
@@ -207,7 +249,7 @@ Node *avl_create(int vals[], int size) {
 }
 
 
-Node *delete(Node **root, int val) {
+Node *delete_node(Node **root, int val) {
     Node **del_node = find(root, val);
     Node *d = *del_node;
 
@@ -226,7 +268,7 @@ Node *delete(Node **root, int val) {
 
     Node **in_order_successor = min_node(&(d->right));
     Node *ios = *in_order_successor;
-    delete(in_order_successor, (*in_order_successor)->val);
+    delete_node(in_order_successor, (*in_order_successor)->val);
     ios->left = d->left;
     ios->right = d->right;
     *del_node = ios;
@@ -235,7 +277,7 @@ Node *delete(Node **root, int val) {
 }
 
 void free_delete(Node **root, int val) {
-    free(delete(root, val));
+    free(delete_node(root, val));
 }
 
 void print(Node **root) {
@@ -267,6 +309,30 @@ void print_inorder_helper(Node *root) {
 
 void print_inorder(Node **root) {
     print_inorder_helper(*root);
+    printf("\n");
+}
+
+void print_preorder_helper(Node *root) {
+    if(root == NULL) return;
+    printf("%d ", root->val);
+    print_preorder_helper(root->left);
+    print_preorder_helper(root->right);
+}
+
+void print_preorder(Node **root) {
+    print_preorder_helper(*root);
+    printf("\n");
+}
+
+void print_postorder_helper(Node *root) {
+    if(root == NULL) return;
+    print_postorder_helper(root->left);
+    print_postorder_helper(root->right);
+    printf("%d ", root->val);
+}
+
+void print_postorder(Node **root) {
+    print_postorder_helper(*root);
     printf("\n");
 }
 
@@ -316,11 +382,13 @@ void print_array(int *arr, int n) {
     printf("\n");
 }
 
+
 #define LEN(X) sizeof(X)/sizeof(X[0]) 
 #define BSTR(X) (X) ? "true" : "false"
-int main() {
+
+void test_delete() {
     unsigned int seed = /*time(NULL)*/1700227685;
-    printf("seed: %ld\n", seed);
+    printf("seed: %ud\n", seed);
     srand(seed);
     int vals[] = {15, 12, 18, 11, 7, 20, 16, 13, 23, 5, 8, 25, 4, 19};
     Node *root = create(vals, LEN(vals));
@@ -330,14 +398,53 @@ int main() {
     printf("\n\n\n"); 
     print_tree(root, 2, '.');
     printf("success: %s", BSTR(is_bst(&root) && contains_all(&root, expected_vals, LEN(expected_vals))));
+}
 
-    // int n = 30;
-    // int *vals = rand_array(n, 99);
-    // print_array(vals, n);
-    // Node *root = avl_create(vals, n);
-    // print_tree(root, 2, '*');
-    // //print_inorder(&root);
-    // printf("contains_all: %s, is_bst: %s, is_balanced: %s", BSTR(contains_all(&root, vals, n)), BSTR(is_bst(&root)), BSTR(is_balanced(&root)));
+void test_avl() {
+    int n = 30;
+    int *vals = rand_array(n, 99);
+    print_array(vals, n);
+    Node *root = avl_create(vals, n);
+    print_tree(root, 2, '*');
+    //print_inorder(&root);
+    printf("contains_all: %s, is_bst: %s, is_balanced: %s", BSTR(contains_all(&root, vals, n)), BSTR(is_bst(&root)), BSTR(is_balanced(&root)));
+}
+
+void test_traversals() {
+    int n = 15;
+    int *vals = rand_array(n, 99);
+    printf("Elements: ");
+    print_array(vals, n);
+    Node *root = create(vals, n);
+    print_tree(root, 2, '.');
+    printf("Inorder: ");
+    print_inorder(&root);
+    printf("Preorder: ");
+    print_preorder(&root);
+    printf("Postorder: ");
+    print_postorder(&root);
+}
+
+void test_iosp() {
+    int n = 15;
+    int *vals = rand_array(n, 99);
+    printf("Elements: ");
+    print_array(vals, n);
+    Node *root = create(vals, n);
+    print_tree(root, 2, '.');
+    int ios_test[] = {28, 69, 5, 43, 27, 42, 1, 95};
+    for(int i = 0; i < LEN(ios_test); i++) {
+        printf("IOS of %d: %d\n", ios_test[i], get_ios(&root, ios_test[i])->val);
+    }
+
+    int *iop_test = ios_test;
+    for(int i = 0; i < LEN(ios_test); i++) {
+        printf("IOP of %d: %d\n", iop_test[i], get_iop(&root, iop_test[i])->val);
+    }
+}
+
+int main() {
+    test_iosp();
     return 0;
 }
 
