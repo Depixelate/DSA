@@ -48,20 +48,22 @@ void swap(MinHeap *heap, int index1, int index2) {
     heap->elems[index2] = temp;
 }
 
-void heapify(MinHeap *heap, int index) {
+int heapify(MinHeap *heap, int index) {
     if(right(index) >= heap->size) {
         if(heap->elems[left(index)] < heap->elems[index]) {
             swap(heap, index, left(index));
+            return left(index);
         }
-        return;
+        return index;
     }
     if(heap->elems[left(index)] < heap->elems[index] && heap->elems[left(index)] <= heap->elems[right(index)]) {
         swap(heap, index, left(index));
-        heapify(heap, left(index));        
+        return heapify(heap, left(index));        
     } else if(heap->elems[right(index)] < heap->elems[index] && heap->elems[right(index)] <= heap->elems[left(index)]) {
         swap(heap, index, right(index));
-        heapify(heap, right(index));
+        return heapify(heap, right(index));
     }
+    return index;
 }
 
 int bubble_up(MinHeap *heap, int index) {
@@ -94,15 +96,30 @@ int get_min(MinHeap *heap) {
     return heap->elems[0];
 }
 
+int correct_pos(heap, index) {
+    int new_index = bubble_up(heap, index);
+    if(new_index != index) {
+        return new_index;
+    }
+    return heapify(heap, index);
+}
+
+void delete(MinHeap *heap, int index) {
+    swap(heap, index, heap->size-1);
+    heap->size--;
+    correct_pos(heap, index);
+}
+
 int extract_min(MinHeap *heap) {
     if(is_empty(heap)) {
         printf("Error!, can't get min, heap is empty!\n");
         return 0;
     }
     int min = heap->elems[0];
-    swap(heap, 0, heap->size-1);
-    heap->size--;
-    heapify(heap, 0);
+    // swap(heap, 0, heap->size-1);
+    // heap->size--;
+    // heapify(heap, 0);
+    delete(heap, 0);
     return min;
 }
 
@@ -133,7 +150,11 @@ int search(MinHeap *heap, int elem) {
     return search_helper(heap, 0, elem);
 }
 
-void delete(MinHeap *heap, int index) {
-    swap(heap, index, heap->size-1);
-    heap->size--;
+int simple_search(MinHeap *heap, int elem) {
+    for(int i = 0; i < heap->size; i++) {
+        if(elem == heap->elems[i]) {
+            return i;
+        }
+    }
+    return -1;
 }
