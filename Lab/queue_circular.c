@@ -16,21 +16,26 @@ Queue *queue_create(int size) {
     return q;
 }
 
-bool is_empty(Queue *q) {
+void queue_destroy(Queue *q) {
+    free(q->array);
+    free(q);
+}
+
+bool queue_is_empty(Queue *q) {
     return q->front == -1 && q->rear == -1;
 }
 
-bool is_full(Queue *q) {
-    return !is_empty(q) && q->front == q->rear;
+bool queue_is_full(Queue *q) {
+    return !queue_is_empty(q) && q->front == q->rear;
 }
 
-void enqueue(Queue *q, int val) {
-    printf("Enqueue...\n");
-    if(is_full(q)) {
+void queue_enqueue(Queue *q, int val) {
+    //printf("Enqueue...\n");
+    if(queue_is_full(q)) {
         printf("Error! Queue Full!\n");
         return;
     }
-    if(is_empty(q)) {
+    if(queue_is_empty(q)) {
         q->front = 0;
         q->rear = 0;
     }
@@ -39,9 +44,9 @@ void enqueue(Queue *q, int val) {
     q->rear %= q->size;
 }
 
-int dequeue(Queue *q) {
-    printf("Dequeue...\n");
-    if(is_empty(q)) {
+int queue_dequeue(Queue *q) {
+    //printf("Dequeue...\n");
+    if(queue_is_empty(q)) {
         printf("Error!, Queue Empty\n");
         return -1;
     }
@@ -51,14 +56,14 @@ int dequeue(Queue *q) {
 
     if(q->front == q->rear) { // This only occurs if queue full, or after removing element, if there are no elements in the queue. Since we have just removed an element, queue can't be full, therefore it must be empty
         q->front = -1;
-        q->rear = 0;
+        q->rear = -1;
     }
     return elem_to_remove;
 }
 
-void print_queue(Queue *q) {
+void queue_print(Queue *q) {
     printf("Printing Queue: ");
-    if(is_empty(q)) {
+    if(queue_is_empty(q)) {
         printf("\n");
         return;
     }
@@ -74,8 +79,8 @@ void print_queue(Queue *q) {
     printf("\n");
 }
 
-int get_size(Queue *S) {
-    if(is_full(S)) {
+int queue_size(Queue *S) {
+    if(queue_is_full(S)) {
         return S->size;
     }
     int size = S->rear - S->front;
@@ -83,30 +88,30 @@ int get_size(Queue *S) {
         size += S->size;
     }
     size %= S->size;
-    printf("Size: %d\n", size);
+    //printf("Size: %d\n", size);
     return size;
 }
 
 #define LEN 41
 
-int main() {
+void test_josephus() {
     Queue *S = queue_create(LEN);
     int josephus[LEN];
     int m = 2;
     for(int i = 0; i < LEN; i++) {
-        enqueue(S, i+1);
+        queue_enqueue(S, i+1);
     }
 
-    while(get_size(S) > 1) {
+    while(queue_size(S) > 1) {
         for(int i = 0; i < m; i++) {
-            enqueue(S, dequeue(S));
+            queue_enqueue(S, queue_dequeue(S));
         }
 
-        int elem = dequeue(S);
+        int elem = queue_dequeue(S);
         printf("Removing %d...\n", elem);
     }
 
-    printf("Congratulations, %d, you are the winner!\n", dequeue(S));
+    printf("Congratulations, %d, you are the winner!\n", queue_dequeue(S));
 
     // enqueue(S, 4);
     // print_queue(S);
@@ -146,6 +151,8 @@ int main() {
     // dequeue(S);
     // print_queue(S);
     free(S);
-    return 0;
+    //return 0;
 }
+
+
 

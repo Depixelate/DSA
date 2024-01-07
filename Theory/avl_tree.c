@@ -4,14 +4,14 @@
 #include <time.h>
 #include <math.h>
 
-typedef struct Node {
+typedef struct DLLNode {
     int height;
     double val;
-    struct Node *left, *right;
-} Node;
+    struct DLLNode *left, *right;
+} DLLNode;
 
-Node *new_node(int height, int val, Node *left, Node *right) {
-    Node *node = (Node *)malloc(sizeof(Node));
+DLLNode *new_node(int height, int val, DLLNode *left, DLLNode *right) {
+    DLLNode *node = (DLLNode *)malloc(sizeof(DLLNode));
     node->height = height;
     node->val = val;
     node->left = left;
@@ -19,20 +19,20 @@ Node *new_node(int height, int val, Node *left, Node *right) {
     return node;
 }
 
-Node *find(Node *root, int val) {
+DLLNode *find(DLLNode *root, int val) {
     if(root == NULL) return NULL;
     if(val == root->val) return root;
     if(val < root->val) return find(root->left, val);
     else return find(root->right, val);
 }
 
-int calc_height(Node *root) {
+int calc_height(DLLNode *root) {
     if(root == NULL) return -1;
     return fmax(height(root->left), height(root->right)) + 1;
 }
 
-Node *find_iter(Node *root, int val) {
-    Node *cur = root;
+DLLNode *find_iter(DLLNode *root, int val) {
+    DLLNode *cur = root;
     while(cur != NULL && cur->val != val) {
         if(val < cur->val) cur = cur->left;
         else cur = cur->right;
@@ -41,7 +41,7 @@ Node *find_iter(Node *root, int val) {
     return cur;
 }
 
-Node *add(Node *root, int val) {
+DLLNode *add(DLLNode *root, int val) {
     if(root == NULL) {
         return new_node(0, val, NULL, NULL);
     }
@@ -53,12 +53,12 @@ Node *add(Node *root, int val) {
     }
 }
 
-Node *add_iter(Node *root, int val) {
-    Node *node = new_node(0, val, NULL, NULL);
+DLLNode *add_iter(DLLNode *root, int val) {
+    DLLNode *node = new_node(0, val, NULL, NULL);
     if(root == NULL) {
         return node;
     }
-    Node *cur = root, *prev = root;
+    DLLNode *cur = root, *prev = root;
     while(cur != NULL) {
         prev = cur;
         if(val < root->val) cur = cur->left;
@@ -69,11 +69,11 @@ Node *add_iter(Node *root, int val) {
     return root; 
 }
 
-Node *delete(Node *root, int val) {
+DLLNode *delete(DLLNode *root, int val) {
 
 }
 
-void print_inorder(Node *root) {
+void print_inorder(DLLNode *root) {
 
     if(root == NULL) {
         return;
@@ -83,9 +83,9 @@ void print_inorder(Node *root) {
     print_inorder(root->right);
 }
 
-void print_level(Node *root, int elem_width) {
+void print_level(DLLNode *root, int elem_width) {
     int height = calc_height(root);
-    Node *queue[4096];
+    DLLNode *queue[4096];
     queue[0] = root;
     int start = 0, end = 1;
     for(int level = height; level >= 0; level--) {
@@ -93,9 +93,9 @@ void print_level(Node *root, int elem_width) {
         printf("%*s", level_start_left_offset, "");
         int node_gap = pow(2, level);
         for(int i = 0; i < pow(2, height - level); i++) {
-            Node *cur = queue[start++];
+            DLLNode *cur = queue[start++];
 
-            Node *left = NULL, *right = NULL;
+            DLLNode *left = NULL, *right = NULL;
             if(cur == NULL) {
                 printf("%*s", elem_width, "");
             } else {

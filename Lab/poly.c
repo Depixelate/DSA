@@ -3,29 +3,29 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct Node {
+typedef struct DLLNode {
     double coeff;
     int power;
-    struct Node *next;
-} Node;
+    struct DLLNode *next;
+} DLLNode;
 
-Node **get_last_next_ptr(Node **head) {
-    Node **cur = head;
+DLLNode **get_last_next_ptr(DLLNode **head) {
+    DLLNode **cur = head;
     for(; *cur != NULL; cur = &(*cur)->next) {}
     return cur;
 }
 
-Node *append(Node **head, double coeff, int power) {
-    Node **end = get_last_next_ptr(head);
-    *end = (Node *) malloc(sizeof(Node));
+DLLNode *append(DLLNode **head, double coeff, int power) {
+    DLLNode **end = get_last_next_ptr(head);
+    *end = (DLLNode *) malloc(sizeof(DLLNode));
     (*end)->coeff = coeff;
     (*end)->power = power;
     (*end)->next = NULL;
     return *end;
 }
 
-Node *free_list(Node *head) {
-    Node *cur = head, *prev = NULL;
+DLLNode *free_list(DLLNode *head) {
+    DLLNode *cur = head, *prev = NULL;
     while(cur != NULL) {
         prev = cur;
         cur = cur->next;
@@ -33,9 +33,9 @@ Node *free_list(Node *head) {
     }
 }
 
-Node *add_polys(Node *poly1, Node *poly2) {
-    Node *res = NULL;
-    for(Node *cur1 = poly1, *cur2=poly2; (cur1 != NULL || cur2 != NULL);) {
+DLLNode *add_polys(DLLNode *poly1, DLLNode *poly2) {
+    DLLNode *res = NULL;
+    for(DLLNode *cur1 = poly1, *cur2=poly2; (cur1 != NULL || cur2 != NULL);) {
         int power = 0;
         double coeff = 0; 
         if(cur1 != NULL && (cur2 == NULL || cur2->power < cur1->power)) {
@@ -61,8 +61,8 @@ Node *add_polys(Node *poly1, Node *poly2) {
     return res;
 }
 
-void print_poly(Node *poly) {
-    for(Node *cur = poly; cur != NULL; cur=cur->next) {
+void print_poly(DLLNode *poly) {
+    for(DLLNode *cur = poly; cur != NULL; cur=cur->next) {
         printf("%.2lfx^%d", cur->coeff, cur->power);
         if(cur->next != NULL) {
             printf(" + ");
@@ -71,9 +71,9 @@ void print_poly(Node *poly) {
     printf("\n");
 }
 
-Node *read_poly() {
+DLLNode *read_poly() {
     printf("Enter a polynomial: ");
-    Node *poly = NULL;
+    DLLNode *poly = NULL;
     int readSpecifiers;
     char buf[4096];
     fgets(buf, 4096, stdin);
@@ -98,9 +98,9 @@ Node *read_poly() {
 }
 
 int main() {
-    Node *poly1 = read_poly();
-    Node *poly2 = read_poly();
-    Node *res = add_polys(poly1, poly2);
+    DLLNode *poly1 = read_poly();
+    DLLNode *poly2 = read_poly();
+    DLLNode *res = add_polys(poly1, poly2);
     printf("Result: ");
     print_poly(res); 
     free_list(poly1);

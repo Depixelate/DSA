@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-typedef struct Node
+typedef struct DLLNode
 {
     const char *val;
-    struct Node *next;
-} Node;
+    struct DLLNode *next;
+} DLLNode;
 
-void free_list(Node *head)
+void free_list(DLLNode *head)
 {
-    Node *prev = NULL;
+    DLLNode *prev = NULL;
     while (head != NULL)
     {
         prev = head;
@@ -18,18 +18,18 @@ void free_list(Node *head)
     }
 }
 
-void print_list(Node *head)
+void print_list(DLLNode *head)
 {
     printf("-----LIST START--------\n");
-    for (Node *cur = head; cur != NULL; cur = cur->next)
+    for (DLLNode *cur = head; cur != NULL; cur = cur->next)
     {
         printf("%s\n", cur->val);
     }
 }
 
-Node **get_end(Node **head)
+DLLNode **get_end(DLLNode **head)
 {
-    Node **end = head;
+    DLLNode **end = head;
     while (*end != NULL)
     {
         end = &((*end)->next);
@@ -37,9 +37,9 @@ Node **get_end(Node **head)
     return end;
 }
 
-Node *get_last(Node *head)
+DLLNode *get_last(DLLNode *head)
 {
-    Node *last = head;
+    DLLNode *last = head;
     while (last->next != NULL)
     {
         last = last->next;
@@ -47,36 +47,36 @@ Node *get_last(Node *head)
     return last;
 }
 
-void insert(Node **insert, const char *val)
+void insert(DLLNode **insert, const char *val)
 {
-    Node *new = (Node *)malloc(sizeof(Node));
+    DLLNode *new = (DLLNode *)malloc(sizeof(DLLNode));
     new->val = val;
     new->next = *insert;
     *insert = new;
 }
 
-const char *remove_node(Node **node)
+const char *remove_node(DLLNode **node)
 {
-    Node *del = *node;
+    DLLNode *del = *node;
     const char *data = del->val;
     *node = (del->next);
     free(del);
     return data;
 }
 
-void append(Node **head, const char *val)
+void append(DLLNode **head, const char *val)
 {
-    Node **end = get_end(head);
+    DLLNode **end = get_end(head);
     insert(end, val);
 }
 
-const char *pop(Node **head)
+const char *pop(DLLNode **head)
 {
-    Node **last = get_last(head);
+    DLLNode **last = get_last(head);
     return remove_node(last);
 }
 
-Node **at(Node *head, int index)
+DLLNode **at(DLLNode *head, int index)
 {
     for (int i = 0; i < index; i++)
     {
@@ -86,7 +86,7 @@ Node **at(Node *head, int index)
     return head;
 }
 
-Node **search(Node *head, const char *val)
+DLLNode **search(DLLNode *head, const char *val)
 {
     for (; head != NULL; head = head->next)
     {
@@ -101,10 +101,10 @@ Node **search(Node *head, const char *val)
 
 
 
-void reverse(Node **head) {
-    Node *cur = *head, *prev = NULL;
+void reverse(DLLNode **head) {
+    DLLNode *cur = *head, *prev = NULL;
     while(cur != NULL) {
-        Node *temp = cur->next;
+        DLLNode *temp = cur->next;
         cur->next = prev;
         prev = cur;
         cur = temp;
@@ -114,7 +114,7 @@ void reverse(Node **head) {
 
 int main()
 {
-    Node *head = NULL;
+    DLLNode *head = NULL;
     append(&head, "Hi");
     append(&head, "Hello");
     append(&head, "What's your name?");

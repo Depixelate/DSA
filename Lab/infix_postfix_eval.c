@@ -4,62 +4,62 @@
 #include <string.h>
 #include <ctype.h>
 
-typedef struct Node
+typedef struct DLLNode
 {
     char *token;
-    struct Node *next;
-} Node;
+    struct DLLNode *next;
+} DLLNode;
 
-Node *new_node(char *token, Node *next)
+DLLNode *new_node(char *token, DLLNode *next)
 {
-    Node *node = malloc(sizeof(Node)); // creates a new node, and initializes it with the specified values;
+    DLLNode *node = malloc(sizeof(DLLNode)); // creates a new node, and initializes it with the specified values;
     node->token = token;
     // strncpy(node->token, token, len);
     node->next = next;
     return node;
 }
 
-Node *stack_init()
+DLLNode *stack_create()
 {
     return NULL; // if top is a null pointer, than it is an empty stack.
 }
 
-bool is_empty(Node *top)
+bool stack_is_empty(DLLNode *top)
 {
     return top == NULL;
 }
 
-bool is_full(Node *top)
+bool stack_is_full(DLLNode *top)
 {
     return false; // As this is implemented as linked list, the stack has no size limit
 }
 
-Node *push(Node *top, char *token)
+DLLNode *push(DLLNode *top, char *token)
 {
-    if (is_full(top))
+    if (stack_is_full(top))
         return NULL;                      // the only possible way NULL can be returned is if the stack is full, as otherwise it would return a valid pointer to the new top of the stack.
-    Node *new_top = new_node(token, top); // the new node created will the new top of the stack, so it will be at the head of the linked list, so it will point to the second element, the current top.
+    DLLNode *new_top = new_node(token, top); // the new node created will the new top of the stack, so it will be at the head of the linked list, so it will point to the second element, the current top.
                                           // also if stack empty, new elem's next will be null, as we want.
     return new_top;
 }
 
-char *pop(Node **top)
+char *pop(DLLNode **top)
 {
-    if (is_empty(*top))
+    if (stack_is_empty(*top))
     {
         printf("Stack Empty, cannot pop!\n");
         return NULL; // a null return value signifies the stack is empty,as stack empty when top * = NULL
     }
-    Node *new_top = (*top)->next; // each element in the stack points to the element below it, with the bottom-most elem pointing to null.
+    DLLNode *new_top = (*top)->next; // each element in the stack points to the element below it, with the bottom-most elem pointing to null.
     char *token = (*top)->token;
     free(*top);
     *top = new_top;
     return token;
 }
 
-char *peek(Node *top)
+char *peek(DLLNode *top)
 {
-    if (is_empty(top))
+    if (stack_is_empty(top))
     {
         printf("\nStack empty!\n");
         return NULL;
@@ -67,10 +67,10 @@ char *peek(Node *top)
     return top->token;
 }
 
-void print_stack(Node *top)
+void stack_print(DLLNode *top)
 {
     printf("Stack start: \n");
-    for (Node *cur = top; cur != NULL; cur = cur->next)
+    for (DLLNode *cur = top; cur != NULL; cur = cur->next)
     { // traverse from stack top to bottom
         printf("%s\n", cur->token);
     }
@@ -105,7 +105,7 @@ int get_precedence(char *op)
 
 int main()
 {
-    Node *top = stack_init();
+    DLLNode *top = stack_create();
     char buf[BUF];
     char output[BUF];
     int cur_pos = 0;
@@ -148,12 +148,12 @@ int main()
         }
         token = strtok(NULL, " ");
     }
-    while(!is_empty(top)) {
+    while(!stack_is_empty(top)) {
         cur_pos += sprintf(output + cur_pos, "%s ", pop(&top));
     }
     printf("Expression: %s\n", output);
 
-    Node *new = stack_init();
+    DLLNode *new = stack_create();
     token = strtok(output, " ");
     while(token != NULL) { 
         if(isdigit(token[0])) {

@@ -3,23 +3,24 @@
 #include <stdbool.h>
 #include <time.h>
 #include <math.h>
+#include "utils.c"
 
-typedef struct Node {
+typedef struct TreeNode {
     int val;
-    struct Node *left;
-    struct Node *right;
-} Node;
+    struct TreeNode *left;
+    struct TreeNode *right;
+} TreeNode;
 
-Node *new_node(int val, Node *left, Node *right) {
-    Node *node = (Node *)malloc(sizeof(Node));
+TreeNode *treenode_create(int val, TreeNode *left, TreeNode *right) {
+    TreeNode *node = (TreeNode *)malloc(sizeof(TreeNode));
     node->val = val;
     node->left = left;
     node->right = right;
     return node;
 }
 
-bool is_bst(Node **root) {
-    Node *r = *root;
+bool is_bst(TreeNode **root) {
+    TreeNode *r = *root;
     if(r == NULL) {
         return true;
     }
@@ -34,32 +35,32 @@ bool is_bst(Node **root) {
     return is_bst(&(r->left)) && is_bst(&(r->right));
 }
 
-Node **min_node(Node **root) {
+TreeNode **min_node(TreeNode **root) {
     if(*root == NULL) {
         return root;
     }
 
-    Node **cur = root;
+    TreeNode **cur = root;
     while((*cur)->left != NULL) {
         cur = &((*cur)->left);
     }
     return cur;
 }
 
-Node **max_node(Node **root) {
+TreeNode **max_node(TreeNode **root) {
     if(*root == NULL) {
         return root;
     }
 
-    Node **cur = root;
+    TreeNode **cur = root;
     while((*cur)->right != NULL) {
         cur = &((*cur)->right);
     }
     return cur;
 }
 
-Node **find(Node **root, int val) {
-    Node **cur = root;
+TreeNode **find(TreeNode **root, int val) {
+    TreeNode **cur = root;
     while(*cur != NULL && (*cur)->val != val) {
         if(val < (*cur)->val) {
             cur = &((*cur)->left);
@@ -70,10 +71,10 @@ Node **find(Node **root, int val) {
     return cur;
 }
 
-Node *get_ios(Node **root, int x) {
-    Node *r = *root;
-    Node *ios = NULL;
-    Node *cur = r;
+TreeNode *get_ios(TreeNode **root, int x) {
+    TreeNode *r = *root;
+    TreeNode *ios = NULL;
+    TreeNode *cur = r;
     while(cur != NULL && cur->val != x) {
         if(x < cur->val) {
             ios = cur;
@@ -90,10 +91,10 @@ Node *get_ios(Node **root, int x) {
     return ios;
 }
 
-Node *get_iop(Node **root, int x) {
-    Node *r = *root;
-    Node *iop = NULL;
-    Node *cur = r;
+TreeNode *get_iop(TreeNode **root, int x) {
+    TreeNode *r = *root;
+    TreeNode *iop = NULL;
+    TreeNode *cur = r;
     while(cur != NULL && cur->val != x) {
         if(x > cur->val) {
             iop = cur;
@@ -110,19 +111,19 @@ Node *get_iop(Node **root, int x) {
     return iop;
 }
 
-bool contains(Node **root, int val) {
+bool contains(TreeNode **root, int val) {
     return *find(root, val) != NULL;
 }
 
-bool contains_all(Node **root, int vals[], int size) {
+bool contains_all(TreeNode **root, int vals[], int size) {
     for(int i = 0; i < size; i++) {
         if(!contains(root, vals[i])) return false;
     }
     return true;
 }
 
-int height(Node **root) {
-    Node *r = *root;
+int height(TreeNode **root) {
+    TreeNode *r = *root;
     if(r == NULL) {
         return -1;
     }
@@ -130,8 +131,8 @@ int height(Node **root) {
     return fmax(height(&(r->left)), height(&(r->right))) + 1;
 }
 
-bool balance_helper(Node **root, int *height) {
-    Node *r = *root;
+bool balance_helper(TreeNode **root, int *height) {
+    TreeNode *r = *root;
 
     if(r == NULL) {
         *height = -1;
@@ -149,7 +150,7 @@ bool balance_helper(Node **root, int *height) {
     return result;
 }
 
-bool is_balanced(Node **root) {
+bool is_balanced(TreeNode **root) {
     int dummy;
     return balance_helper(root, &dummy); 
 }
@@ -161,33 +162,33 @@ bool is_balanced(Node **root) {
 
 // }
 
-void add(Node **root, int val) {
-    Node **cur = min_node(find(root, val));
-    *cur = new_node(val, NULL, NULL);
+void add(TreeNode **root, int val) {
+    TreeNode **cur = min_node(find(root, val));
+    *cur = treenode_create(val, NULL, NULL);
 }
 
-void rotate_left(Node **root) {
-    Node *r = *root;
-    Node *right = r->right;
+void rotate_left(TreeNode **root) {
+    TreeNode *r = *root;
+    TreeNode *right = r->right;
     *root = right;
-    Node *temp = right->left;
+    TreeNode *temp = right->left;
     right->left = r;
     r->right = temp;
 }
 
-void rotate_right(Node **root) {
-    Node *r = *root;
-    Node *left = r->left;
+void rotate_right(TreeNode **root) {
+    TreeNode *r = *root;
+    TreeNode *left = r->left;
     *root = left;
-    Node *temp = left->right;
+    TreeNode *temp = left->right;
     left->right = r;
     r->left = temp;
 }
 
-void avl_add(Node **root, int val) {
-    Node *r = *root;
+void avl_add(TreeNode **root, int val) {
+    TreeNode *r = *root;
     if(r==NULL) {
-        *root = new_node(val, NULL, NULL);
+        *root = treenode_create(val, NULL, NULL);
         return;
     } else if(val < r->val) {
         avl_add(&(r->left), val);
@@ -197,8 +198,8 @@ void avl_add(Node **root, int val) {
             return;
         }
 
-        Node **left = &(r->left);
-        Node *l = *left;
+        TreeNode **left = &(r->left);
+        TreeNode *l = *left;
         int left_left_h = height(&(l->left)), left_right_h = height(&(l->right));
         if(left_left_h >= left_right_h) {
             printf("rotate %d right!\n", r->val);
@@ -218,8 +219,8 @@ void avl_add(Node **root, int val) {
             return;
         }
 
-        Node **right = &(r->right);
-        Node *ri = *right;
+        TreeNode **right = &(r->right);
+        TreeNode *ri = *right;
         int right_left_h = height(&(ri->left)), right_right_h = height(&(ri->right));
         if(right_right_h >= right_left_h) {
             printf("rotate %d left!\n", r->val);
@@ -232,16 +233,16 @@ void avl_add(Node **root, int val) {
     }
 }
 
-Node *create(int vals[], int size) {
-    Node *head = NULL;
+TreeNode *create(int vals[], int size) {
+    TreeNode *head = NULL;
     for(int i = 0; i < size; i++) {
         add(&head, vals[i]);
     }
     return head;
 }
 
-Node *avl_create(int vals[], int size) {
-    Node *head = NULL;
+TreeNode *avl_create(int vals[], int size) {
+    TreeNode *head = NULL;
     for(int i = 0; i < size; i++) {
         avl_add(&head, vals[i]);
     }
@@ -249,9 +250,9 @@ Node *avl_create(int vals[], int size) {
 }
 
 
-Node *delete_node(Node **root, int val) {
-    Node **del_node = find(root, val);
-    Node *d = *del_node;
+TreeNode *delete_node(TreeNode **root, int val) {
+    TreeNode **del_node = find(root, val);
+    TreeNode *d = *del_node;
 
     if(d == NULL) {
         return NULL;
@@ -266,8 +267,8 @@ Node *delete_node(Node **root, int val) {
         return d;
     }
 
-    Node **in_order_successor = min_node(&(d->right));
-    Node *ios = *in_order_successor;
+    TreeNode **in_order_successor = min_node(&(d->right));
+    TreeNode *ios = *in_order_successor;
     delete_node(in_order_successor, (*in_order_successor)->val);
     ios->left = d->left;
     ios->right = d->right;
@@ -276,16 +277,16 @@ Node *delete_node(Node **root, int val) {
     return d;
 }
 
-void free_delete(Node **root, int val) {
+void free_delete(TreeNode **root, int val) {
     free(delete_node(root, val));
 }
 
-void print(Node **root) {
-    Node *queue[4096];
+void print(TreeNode **root) {
+    TreeNode *queue[4096];
     queue[0] = *root;
     int front = 0, back = 1;
     while(front != back) {
-        Node *cur = queue[front];
+        TreeNode *cur = queue[front];
         front++;
         if(cur == NULL) {
             printf("NULL ");
@@ -300,45 +301,45 @@ void print(Node **root) {
     printf("\n");
 }
 
-void print_inorder_helper(Node *root) {
+void print_inorder_helper(TreeNode *root) {
     if(root == NULL) return;
     print_inorder_helper(root->left);
     printf("%d ", root->val);
     print_inorder_helper(root->right);
 }
 
-void print_inorder(Node **root) {
+void print_inorder(TreeNode **root) {
     print_inorder_helper(*root);
     printf("\n");
 }
 
-void print_preorder_helper(Node *root) {
+void print_preorder_helper(TreeNode *root) {
     if(root == NULL) return;
     printf("%d ", root->val);
     print_preorder_helper(root->left);
     print_preorder_helper(root->right);
 }
 
-void print_preorder(Node **root) {
+void print_preorder(TreeNode **root) {
     print_preorder_helper(*root);
     printf("\n");
 }
 
-void print_postorder_helper(Node *root) {
+void print_postorder_helper(TreeNode *root) {
     if(root == NULL) return;
     print_postorder_helper(root->left);
     print_postorder_helper(root->right);
     printf("%d ", root->val);
 }
 
-void print_postorder(Node **root) {
+void print_postorder(TreeNode **root) {
     print_postorder_helper(*root);
     printf("\n");
 }
 
-void print_tree(Node *root, int elem_width, char nil_char) {
+void print_tree(TreeNode *root, int elem_width, char nil_char) {
     int h = height(&root);
-    Node *queue[4096];
+    TreeNode *queue[4096];
     queue[0] = root;
     int start = 0, end = 1;
     for(int level = h; level >= 0; level--) {
@@ -347,9 +348,9 @@ void print_tree(Node *root, int elem_width, char nil_char) {
         int node_gap = pow(2, level+1)-1;
         //printf("Node gap: %d|", node_gap);
         for(int i = 0; i < pow(2, h - level); i++) {
-            Node *cur = queue[start++];
+            TreeNode *cur = queue[start++];
 
-            Node *left = NULL, *right = NULL;
+            TreeNode *left = NULL, *right = NULL;
             if(cur == NULL) {
                 for(int i = 0; i < elem_width; i++) {
                     printf("%c", nil_char);
@@ -367,31 +368,13 @@ void print_tree(Node *root, int elem_width, char nil_char) {
     }
 }
 
-int *rand_array(int n, int max) {
-    int *arr = (int *)malloc(sizeof(int) * n);
-    for(int i = 0; i < n; i++) {
-        arr[i] = rand() % max;
-    }
-    return arr;
-}
-
-void print_array(int *arr, int n) {
-    for(int i = 0; i < n; i++) {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
-}
-
-
-#define LEN(X) sizeof(X)/sizeof(X[0]) 
-#define BSTR(X) (X) ? "true" : "false"
 
 void test_delete() {
     unsigned int seed = /*time(NULL)*/1700227685;
     printf("seed: %ud\n", seed);
     srand(seed);
     int vals[] = {15, 12, 18, 11, 7, 20, 16, 13, 23, 5, 8, 25, 4, 19};
-    Node *root = create(vals, LEN(vals));
+    TreeNode *root = create(vals, LEN(vals));
     print_tree(root, 2, '-');
     free_delete(&root, 15);
     int expected_vals[] = {/*15,*/ 12, 18, 11, 7, 20, 16, 13, 23, 5, 8, 25, 4, 19};
@@ -404,7 +387,7 @@ void test_avl() {
     int n = 30;
     int *vals = rand_array(n, 99);
     print_array(vals, n);
-    Node *root = avl_create(vals, n);
+    TreeNode *root = avl_create(vals, n);
     print_tree(root, 2, '*');
     //print_inorder(&root);
     printf("contains_all: %s, is_bst: %s, is_balanced: %s", BSTR(contains_all(&root, vals, n)), BSTR(is_bst(&root)), BSTR(is_balanced(&root)));
@@ -415,7 +398,7 @@ void test_traversals() {
     int *vals = rand_array(n, 99);
     printf("Elements: ");
     print_array(vals, n);
-    Node *root = create(vals, n);
+    TreeNode *root = create(vals, n);
     print_tree(root, 2, '.');
     printf("Inorder: ");
     print_inorder(&root);
@@ -430,7 +413,7 @@ void test_iosp() {
     int *vals = rand_array(n, 99);
     printf("Elements: ");
     print_array(vals, n);
-    Node *root = create(vals, n);
+    TreeNode *root = create(vals, n);
     print_tree(root, 2, '.');
     int ios_test[] = {28, 69, 5, 43, 27, 42, 1, 95};
     for(int i = 0; i < LEN(ios_test); i++) {
@@ -443,8 +426,37 @@ void test_iosp() {
     }
 }
 
+TreeNode *tree_find_from_inorder_preorder(int inorder[], int preorder[], int size, int preorder_pos, int inorder_min, int inorder_max) {
+    if(inorder_max - inorder_min < 0) return NULL; 
+    int inorder_pos;
+    for(int i = inorder_min; i <= inorder_max; i++) {
+        if(inorder[i] == preorder[preorder_pos]) {
+            inorder_pos = i;
+            break;
+        }
+    }
+    TreeNode *node = treenode_create(preorder[preorder_pos], NULL, NULL);
+    node->left = tree_find_from_inorder_preorder(inorder, preorder, size, preorder_pos + 1, inorder_min, inorder_pos-1);
+    node->right = tree_find_from_inorder_preorder(inorder, preorder, size, preorder_pos + 1 + (inorder_pos - inorder_min), inorder_pos + 1, inorder_max); 
+    return node;
+
+
+}
+
+
+
+
+
+
+void test_get_tree_from_inorder_preorder() {
+    int inorder[] = {1, 2, 5, 5, 10, 15, 22};
+    int preorder[] = {10, 5, 2, 1, 5, 15, 22};
+    TreeNode *root = tree_find_from_inorder_preorder(inorder, preorder, LEN(inorder), 0, 0, LEN(inorder)-1);
+    print_tree(root, 2, '.');
+}
+
 int main() {
-    test_iosp();
+    test_get_tree_from_inorder_preorder();
     return 0;
 }
 

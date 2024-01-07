@@ -158,3 +158,4 @@ int simple_search(MinHeap *heap, int elem) {
     }
     return -1;
 }
+

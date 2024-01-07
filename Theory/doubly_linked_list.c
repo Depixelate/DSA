@@ -1,16 +1,16 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-typedef struct Node
+typedef struct DLLNode
 {
     int data;
-    struct Node *prev;
-    struct Node *next;
-} Node;
+    struct DLLNode *prev;
+    struct DLLNode *next;
+} DLLNode;
 
-Node *new_node(int data, Node *prev, Node *next)
+DLLNode *new_node(int data, DLLNode *prev, DLLNode *next)
 {
-    Node *node = (Node *)malloc(sizeof(Node));
+    DLLNode *node = (DLLNode *)malloc(sizeof(DLLNode));
     node->data = data;
     node->prev = prev;
     node->next = next;
@@ -19,29 +19,29 @@ Node *new_node(int data, Node *prev, Node *next)
 
 typedef struct DLL
 {
-    Node *head;
-    Node *tail;
+    DLLNode *head;
+    DLLNode *tail;
 } DLL;
 
-void print_head(Node *head)
+void print_head(DLLNode *head)
 {
-    for (Node *cur = head; cur != NULL; cur = cur->next)
+    for (DLLNode *cur = head; cur != NULL; cur = cur->next)
     {
         printf("%d ", cur->data);
     }
     printf("\n");
 }
 
-void print_tail(Node *tail)
+void print_tail(DLLNode *tail)
 {
-    for (Node *cur = tail; cur != NULL; cur = cur->prev)
+    for (DLLNode *cur = tail; cur != NULL; cur = cur->prev)
     {
         printf("%d ", cur->data);
     }
     printf("\n");
 }
 
-Node *append(Node *tail, int data)
+DLLNode *append(DLLNode *tail, int data)
 {
     if (tail == NULL)
     {
@@ -49,14 +49,14 @@ Node *append(Node *tail, int data)
     }
     else
     {
-        Node *prev = tail;
+        DLLNode *prev = tail;
         tail = new_node(data, prev, NULL);
         prev->next = tail;
     }
     return tail;
 }
 
-Node *add_head(Node *head, int data)
+DLLNode *add_head(DLLNode *head, int data)
 {
     if (head == NULL)
     {
@@ -64,7 +64,7 @@ Node *add_head(Node *head, int data)
     }
     else
     {
-        Node *next = head;
+        DLLNode *next = head;
         head = new_node(data, NULL, next);
         next->prev = head;
     }
@@ -72,7 +72,7 @@ Node *add_head(Node *head, int data)
     return head;
 }
 
-void new_list(int n, Node **head, Node **tail)
+void new_list(int n, DLLNode **head, DLLNode **tail)
 {
     *head = new_node(0, NULL, NULL);
     *tail = *head;
@@ -82,7 +82,7 @@ void new_list(int n, Node **head, Node **tail)
     }
 }
 
-void from_arr(int arr[], int size, Node **head, Node **tail) {
+void from_arr(int arr[], int size, DLLNode **head, DLLNode **tail) {
     *head = new_node(arr[0], NULL, NULL);
     *tail = *head;
     for (int i = 1; i < size; i++)
@@ -91,9 +91,9 @@ void from_arr(int arr[], int size, Node **head, Node **tail) {
     }
 }
 
-void free_list(Node *head)
+void free_list(DLLNode *head)
 {
-    Node *cur = head, *prev = NULL;
+    DLLNode *cur = head, *prev = NULL;
     while (cur != NULL)
     {
         prev = cur;
@@ -102,9 +102,9 @@ void free_list(Node *head)
     }
 }
 
-Node *get(Node *head, int pos)
+DLLNode *get(DLLNode *head, int pos)
 {
-    Node *cur = head;
+    DLLNode *cur = head;
     for (int i = 0; i < pos; i++)
     {
         cur = cur->next;
@@ -113,10 +113,10 @@ Node *get(Node *head, int pos)
     return cur;
 }
 
-Node *find(Node *head, int data)
+DLLNode *find(DLLNode *head, int data)
 {
 
-    for (Node *cur = head; cur != NULL; cur = cur->next)
+    for (DLLNode *cur = head; cur != NULL; cur = cur->next)
     {
         if (cur->data == data)
         {
@@ -127,14 +127,14 @@ Node *find(Node *head, int data)
     return NULL;
 }
 
-Node *insert(Node *pos, int data)
+DLLNode *insert(DLLNode *pos, int data)
 {
     if (pos == NULL)
     {
         return add_head(pos, data);
     }
-    Node *prev = pos->prev;
-    Node *node = new_node(data, prev, pos);
+    DLLNode *prev = pos->prev;
+    DLLNode *node = new_node(data, prev, pos);
     pos->prev = node;
 
     if (prev != NULL)
@@ -145,9 +145,9 @@ Node *insert(Node *pos, int data)
     return node;
 }
 
-void delete(Node *node)
+void delete(DLLNode *node)
 {
-    Node *prev = node->prev, *next = node->next;
+    DLLNode *prev = node->prev, *next = node->next;
     if (prev != NULL)
     {
         prev->next = next;
@@ -161,8 +161,8 @@ void delete(Node *node)
     free(node);
 }
 
-Node *pop(Node *tail) {
-    Node *prev = tail->prev;
+DLLNode *stack_pop(DLLNode *tail) {
+    DLLNode *prev = tail->prev;
     if (prev != NULL)
     {
         prev->next = NULL;
@@ -171,8 +171,8 @@ Node *pop(Node *tail) {
     return prev;
 }
 
-Node *remove_head(Node *head) {
-    Node *next = head->next;
+DLLNode *remove_head(DLLNode *head) {
+    DLLNode *next = head->next;
     if(next != NULL) {
         next->prev = NULL;
     }
@@ -180,22 +180,22 @@ Node *remove_head(Node *head) {
     return next;
 }
 
-void reverse(Node **head, Node **tail) {
-    Node *temp = *head;
+void reverse(DLLNode **head, DLLNode **tail) {
+    DLLNode *temp = *head;
     *head = *tail;
     *tail = temp;
-    for(Node *cur = *head; cur != NULL; cur = cur->next) {
-        Node * temp = cur->next;
+    for(DLLNode *cur = *head; cur != NULL; cur = cur->next) {
+        DLLNode * temp = cur->next;
         cur->next = cur->prev;
         cur->prev = temp;
     }
 }
 
-void merge(Node *head1, Node *head2, Node **new_head, Node **new_tail) {
+void merge(DLLNode *head1, DLLNode *head2, DLLNode **new_head, DLLNode **new_tail) {
     //Node *merge_head = NULL;
-    Node *dummy_head = new_node(0, NULL, NULL);
-    Node *cur = dummy_head;
-    Node *cur1 = head1, *cur2 = head2;
+    DLLNode *dummy_head = new_node(0, NULL, NULL);
+    DLLNode *cur = dummy_head;
+    DLLNode *cur1 = head1, *cur2 = head2;
     while(cur1 != NULL || cur2 != NULL) {
         if(cur1==NULL) {
             cur->next = cur2;
@@ -204,14 +204,14 @@ void merge(Node *head1, Node *head2, Node **new_head, Node **new_tail) {
             cur->next = cur1;
             cur1 = cur1->next;
         } else {
-            Node **less = &cur1;
+            DLLNode **less = &cur1;
             if(cur1->data > cur2->data) {
                 less = &cur2;
             }
             cur->next = *less;
             *less = (*less)->next;
         }
-        Node *next = cur->next;
+        DLLNode *next = cur->next;
         next->prev = cur;
         cur = next;
     }
@@ -226,27 +226,27 @@ void merge(Node *head1, Node *head2, Node **new_head, Node **new_tail) {
 
 int main()
 {
-    Node *head, *tail;
+    DLLNode *head, *tail;
     new_list(5, &head, &tail);
     print_head(head);
     print_tail(tail);
     printf("Data at 3: %d\n", get(head, 3)->data);
-    Node *n = insert(get(head, 3), 9);
+    DLLNode *n = insert(get(head, 3), 9);
     print_head(head);
     head = remove_head(head);
     print_head(head);
-    tail = pop(tail);
+    tail = stack_pop(tail);
     print_head(head);
     delete (find(head, 9));
     print_head(head);
     //reverse(&head, &tail);
     print_head(head);
-    Node *head2, *tail2;
+    DLLNode *head2, *tail2;
     int arr[] = {-5, 1, 3, 5, 7};
     from_arr(arr, 5, &head2, &tail2);
     print_head(head2);
 
-    Node * new_head, *new_tail;
+    DLLNode * new_head, *new_tail;
 
     
 

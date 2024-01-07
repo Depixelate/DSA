@@ -3,13 +3,32 @@
         {
             "type": "cppbuild",
             "label": "C/C++: gcc build active file",
-            "command": "/usr/bin/gcc",
+            "command": "gcc",
             "args": [
                 "-fdiagnostics-color=always",
-                "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}\\${fileBasenameNoExtension}",
+                "-lm", 
+                "-Wall",
+                "-Wextra", 
+                "-pedantic",
+                "-std=c99",
+                "-O0",
+                "-Wshadow",
+                "-Wformat=2",
+                "-Wfloat-equal",
+                "-Wconversion",
+                "-Wlogical-op",
+                "-Wshift-overflow=2",
+                "-Wduplicated-cond",
+                "-Wcast-qual",
+                "-Wcast-align",
+                "-D_GLIBCXX_DEBUG",
+                "-D_GLIBCXX_DEBUG_PEDANTIC",
+                "-D_FORTIFY_SOURCE=2",
+                "-fstack-protector",
+                "-ggdb3"
             ],
             "options": {
                 "cwd": "${fileDirname}"
