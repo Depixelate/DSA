@@ -247,7 +247,7 @@ Graph *floyd_warshall(Graph *g) {
     for(int k = 0; k < g->size; k++) {
         for(int i = 0; i < g->size; i++) {
             for(int j = 0; j < g->size; j++) {
-                if(d->weights[i][j] > d->weights[i][k] + d->[k][i]) {
+                if(d->weights[i][j] > d->weights[i][k] + d->[k][j]) {
                     d[i][j] = d[i][k] + d[k][j];
                     p[i][j] = p[i][k];
                 }

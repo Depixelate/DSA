@@ -1,0 +1,708 @@
+Enter the number of squares in the board: 100
+Now creating the snakes and ladders!(skips)
+Enter 1 to create a skip, 2 to quit: 1
+Enter the starting and ending points(<start> <end>): 5 35
+Now creating the snakes and ladders!(skips)
+Enter 1 to create a skip, 2 to quit: 1
+Enter the starting and ending points(<start> <end>): 8 25
+Now creating the snakes and ladders!(skips)
+Enter 1 to create a skip, 2 to quit: 1
+Enter the starting and ending points(<start> <end>): 17 45
+Now creating the snakes and ladders!(skips)
+Enter 1 to create a skip, 2 to quit: 1
+Enter the starting and ending points(<start> <end>): 23 62
+Now creating the snakes and ladders!(skips)
+Enter 1 to create a skip, 2 to quit: 1
+Enter the starting and ending points(<start> <end>): 30 52
+Now creating the snakes and ladders!(skips)
+Enter 1 to create a skip, 2 to quit: 1
+Enter the starting and ending points(<start> <end>): 51 72
+Now creating the snakes and ladders!(skips)
+Enter 1 to create a skip, 2 to quit: 1
+Enter the starting and ending points(<start> <end>):  70 91
+Now creating the snakes and ladders!(skips)
+Enter 1 to create a skip, 2 to quit: 1
+Enter the starting and ending points(<start> <end>): 80 99
+Now creating the snakes and ladders!(skips)
+Enter 1 to create a skip, 2 to quit: 1
+Enter the starting and ending points(<start> <end>): 98 40
+Now creating the snakes and ladders!(skips)
+Enter 1 to create a skip, 2 to quit: 1
+Enter the starting and ending points(<start> <end>): 87 24
+Now creating the snakes and ladders!(skips)
+Enter 1 to create a skip, 2 to quit: 1
+Enter the starting and ending points(<start> <end>): 75 48
+Now creating the snakes and ladders!(skips)
+Enter 1 to create a skip, 2 to quit: 1
+Enter the starting and ending points(<start> <end>): 68 32
+Now creating the snakes and ladders!(skips)
+Enter 1 to create a skip, 2 to quit: 1
+Enter the starting and ending points(<start> <end>): 56 14
+Now creating the snakes and ladders!(skips)
+Enter 1 to create a skip, 2 to quit: 1
+Enter the starting and ending points(<start> <end>): 43 18
+Now creating the snakes and ladders!(skips)
+Enter 1 to create a skip, 2 to quit: 1
+Enter the starting and ending points(<start> <end>): 36 6
+Now creating the snakes and ladders!(skips)
+Enter 1 to create a skip, 2 to quit: 2
+
+Player 2 is on square 1
+Press Enter to Roll:
+Your roll was: 4
+Moving 4 spaces forward.
+Player 2 is now on square 5
+
+This Square is a LADDER, player 2 is now at square 35
+
+Press Enter to continue:
+
+Player 1 is on square 1
+Press Enter to Roll:
+Your roll was: 5
+Moving 5 spaces forward.
+Player 1 is now on square 6
+
+
+Press Enter to continue:
+
+Player 2 is on square 35
+Press Enter to Roll:
+Your roll was: 9
+Moving 3 spaces backward.
+Player 2 is now on square 32
+
+
+Press Enter to continue:
+
+Player 1 is on square 6
+Press Enter to Roll:
+Your roll was: 8
+Moving 2 spaces backward.
+Player 1 is now on square 4
+
+
+Press Enter to continue:
+
+Player 2 is on square 32
+Press Enter to Roll:
+Your roll was: 3
+Moving 3 spaces forward.
+Player 2 is now on square 35
+
+
+Press Enter to continue:
+
+Player 1 is on square 4
+Press Enter to Roll:
+Your roll was: 6
+Moving 6 spaces forward.
+Player 1 is now on square 10
+
+
+Press Enter to continue: 
+
+Player 2 is on square 35
+Press Enter to Roll:
+Your roll was: 10
+Moving 4 spaces backward.
+Player 2 is now on square 31
+
+
+Press Enter to continue:
+
+Player 1 is on square 10
+Press Enter to Roll:
+Your roll was: 2
+Moving 2 spaces forward.
+Player 1 is now on square 12
+
+
+Press Enter to continue: 
+
+Player 2 is on square 31
+Press Enter to Roll:
+Your roll was: 5
+Moving 5 spaces forward.
+Player 2 is now on square 36
+
+This Square is a SNAKE, player 2 is now at square 6
+
+Press Enter to continue:
+
+Player 1 is on square 12
+Press Enter to Roll:
+Your roll was: 3
+Moving 3 spaces forward.
+Player 1 is now on square 15
+
+
+Press Enter to continue: 
+
+Player 2 is on square 6
+Press Enter to Roll:
+Your roll was: 6
+Moving 6 spaces forward.
+Player 2 is now on square 12
+
+
+Press Enter to continue:
+
+Player 1 is on square 15
+Press Enter to Roll:
+Your roll was: 9
+Moving 3 spaces backward.
+Player 1 is now on square 12
+
+
+Press Enter to continue:
+
+Player 2 is on square 12
+Press Enter to Roll:
+Your roll was: 9
+Moving 3 spaces backward.
+Player 2 is now on square 9
+
+
+Press Enter to continue:
+
+Player 1 is on square 12
+Press Enter to Roll:
+Your roll was: 2
+Moving 2 spaces forward.
+Player 1 is now on square 14
+
+
+Press Enter to continue:
+
+Player 2 is on square 9
+Press Enter to Roll:
+Your roll was: 2
+Moving 2 spaces forward.
+Player 2 is now on square 11
+
+
+Press Enter to continue:
+
+Player 1 is on square 14
+Press Enter to Roll:
+Your roll was: 2
+Moving 2 spaces forward.
+Player 1 is now on square 16
+
+
+Press Enter to continue:
+
+Player 2 is on square 11
+Press Enter to Roll:
+Your roll was: 5
+Moving 5 spaces forward.
+Player 2 is now on square 16
+
+
+Press Enter to continue:
+
+Player 1 is on square 16
+Press Enter to Roll:
+Your roll was: 5
+Moving 5 spaces forward.
+Player 1 is now on square 21
+
+
+Press Enter to continue:
+
+Player 2 is on square 16
+Press Enter to Roll:
+Your roll was: 8
+Moving 2 spaces backward.
+Player 2 is now on square 14
+
+
+Press Enter to continue:
+
+Player 1 is on square 21
+Press Enter to Roll:
+Your roll was: 8
+Moving 2 spaces backward.
+Player 1 is now on square 19
+
+
+Press Enter to continue:
+
+Player 2 is on square 14
+Press Enter to Roll:
+Your roll was: 0
+You got 0, rolling again!
+Press Enter to Roll:
+Your roll was: 0
+You got 0, rolling again!
+Press Enter to Roll:
+Your roll was: 0
+You got 0, rolling again!
+Press Enter to Roll:
+Your roll was: 0
+You got 0, rolling again!
+Press Enter to Roll:
+Your roll was: 7
+Moving 1 spaces backward.
+Player 2 is now on square 13
+
+
+Press Enter to continue:
+
+Player 1 is on square 19
+Press Enter to Roll:
+Your roll was: 7
+Moving 1 spaces backward.
+Player 1 is now on square 18
+
+
+Press Enter to continue:
+
+Player 2 is on square 13
+Press Enter to Roll:
+Your roll was: 10
+Moving 4 spaces backward.
+Player 2 is now on square 9
+
+
+Press Enter to continue:
+
+Player 1 is on square 18
+Press Enter to Roll:
+Your roll was: 10
+Moving 4 spaces backward.
+Player 1 is now on square 14
+
+
+Press Enter to continue:
+
+Player 2 is on square 9
+Press Enter to Roll:
+Your roll was: 3
+Moving 3 spaces forward.
+Player 2 is now on square 12
+
+
+Press Enter to continue:
+
+Player 1 is on square 14
+Press Enter to Roll:
+Your roll was: 3
+Moving 3 spaces forward.
+Player 1 is now on square 17
+
+This Square is a LADDER, player 1 is now at square 45
+
+Press Enter to continue: 
+
+Player 2 is on square 12
+Press Enter to Roll:
+Your roll was: 6
+Moving 6 spaces forward.
+Player 2 is now on square 18
+
+
+Press Enter to continue:
+
+Player 1 is on square 45
+Press Enter to Roll:
+Your roll was: 9
+Moving 3 spaces backward.
+Player 1 is now on square 42
+
+
+Press Enter to continue:
+
+Player 2 is on square 18
+Press Enter to Roll:
+Your roll was: 9
+Moving 3 spaces backward.
+Player 2 is now on square 15
+
+
+Press Enter to continue:
+
+Player 1 is on square 42
+Press Enter to Roll:
+Your roll was: 9
+Moving 3 spaces backward.
+Player 1 is now on square 39
+
+
+Press Enter to continue:
+
+Player 2 is on square 15
+Press Enter to Roll:
+Your roll was: 1
+Moving 1 spaces forward.
+Player 2 is now on square 16
+
+
+Press Enter to continue:
+
+Player 1 is on square 39
+Press Enter to Roll:
+Your roll was: 1
+Moving 1 spaces forward.
+Player 1 is now on square 40
+
+
+Press Enter to continue:
+
+Player 2 is on square 16
+Press Enter to Roll:
+Your roll was: 5
+Moving 5 spaces forward.
+Player 2 is now on square 21
+
+
+Press Enter to continue:
+
+Player 1 is on square 40
+Press Enter to Roll:
+Your roll was: 5
+Moving 5 spaces forward.
+Player 1 is now on square 45
+
+
+Press Enter to continue:
+
+Player 2 is on square 21
+Press Enter to Roll:
+Your roll was: 8
+Moving 2 spaces backward.
+Player 2 is now on square 19
+
+
+Press Enter to continue: 
+
+Player 1 is on square 45
+Press Enter to Roll:
+Your roll was: 8
+Moving 2 spaces backward.
+Player 1 is now on square 43
+
+This Square is a SNAKE, player 1 is now at square 18
+
+Press Enter to continue:
+
+Player 2 is on square 19
+Press Enter to Roll:
+Your roll was: 0
+You got 0, rolling again!
+Press Enter to Roll:
+Your roll was: 0
+You got 0, rolling again!
+Press Enter to Roll:
+Your roll was: 0
+You got 0, rolling again!
+Press Enter to Roll:
+Your roll was: 0
+You got 0, rolling again!
+Press Enter to Roll:
+Your roll was: 3
+Moving 3 spaces forward.
+Player 2 is now on square 22
+
+
+Press Enter to continue:
+
+Player 1 is on square 18
+Press Enter to Roll:
+Your roll was: 3
+Moving 3 spaces forward.
+Player 1 is now on square 21
+
+
+Press Enter to continue:
+
+Player 2 is on square 22
+Press Enter to Roll:
+Your roll was: 7
+Moving 1 spaces backward.
+Player 2 is now on square 21
+
+
+Press Enter to continue:
+
+Player 1 is on square 21
+Press Enter to Roll:
+Your roll was: 7
+Moving 1 spaces backward.
+Player 1 is now on square 20
+
+
+Press Enter to continue:
+
+Player 2 is on square 21
+Press Enter to Roll:
+Your roll was: 7
+Moving 1 spaces backward.
+Player 2 is now on square 20
+
+
+Press Enter to continue:
+
+Player 1 is on square 20
+Press Enter to Roll:
+Your roll was: 10
+Moving 4 spaces backward.
+Player 1 is now on square 16
+
+
+Press Enter to continue:
+
+Player 2 is on square 20
+Press Enter to Roll:
+Your roll was: 10
+Moving 4 spaces backward.
+Player 2 is now on square 16
+
+
+Press Enter to continue:
+
+Player 1 is on square 16
+Press Enter to Roll:
+Your roll was: 2
+Moving 2 spaces forward.
+Player 1 is now on square 18
+
+
+Press Enter to continue:
+
+Player 2 is on square 16
+Press Enter to Roll:
+Your roll was: 2
+Moving 2 spaces forward.
+Player 2 is now on square 18
+
+
+Press Enter to continue:
+
+Player 1 is on square 18
+Press Enter to Roll:
+Your roll was: 2
+Moving 2 spaces forward.
+Player 1 is now on square 20
+
+
+Press Enter to continue:
+
+Player 2 is on square 18
+Press Enter to Roll:
+Your roll was: 5
+Moving 5 spaces forward.
+Player 2 is now on square 23
+
+This Square is a LADDER, player 2 is now at square 62
+
+Press Enter to continue:
+
+Player 1 is on square 20
+Press Enter to Roll:
+Your roll was: 5
+Moving 5 spaces forward.
+Player 1 is now on square 25
+
+
+Press Enter to continue:
+
+Player 2 is on square 62
+Press Enter to Roll:
+Your roll was: 9
+Moving 3 spaces backward.
+Player 2 is now on square 59
+
+
+Press Enter to continue:
+
+Player 1 is on square 25
+Press Enter to Roll:
+Your roll was: 9
+Moving 3 spaces backward.
+Player 1 is now on square 22
+
+
+Press Enter to continue:
+
+Player 2 is on square 59
+Press Enter to Roll:
+Your roll was: 9
+Moving 3 spaces backward.
+Player 2 is now on square 56
+
+This Square is a SNAKE, player 2 is now at square 14
+
+Press Enter to continue:
+
+Player 1 is on square 22
+Press Enter to Roll:
+Your roll was: 1
+Moving 1 spaces forward.
+Player 1 is now on square 23
+
+This Square is a LADDER, player 1 is now at square 62
+
+Press Enter to continue:
+
+Player 2 is on square 14
+Press Enter to Roll:
+Your roll was: 1
+Moving 1 spaces forward.
+Player 2 is now on square 15
+
+
+Press Enter to continue:
+
+Player 1 is on square 62
+Press Enter to Roll:
+Your roll was: 4
+Moving 4 spaces forward.
+Player 1 is now on square 66
+
+
+Press Enter to continue:
+
+Player 2 is on square 15
+Press Enter to Roll:
+Your roll was: 4
+Moving 4 spaces forward.
+Player 2 is now on square 19
+
+
+Press Enter to continue:
+
+Player 1 is on square 66
+Press Enter to Roll:
+Your roll was: 4
+Moving 4 spaces forward.
+Player 1 is now on square 70
+
+This Square is a LADDER, player 1 is now at square 91
+
+Press Enter to continue:
+
+Player 2 is on square 19
+Press Enter to Roll:
+Your roll was: 8
+Moving 2 spaces backward.
+Player 2 is now on square 17
+
+This Square is a LADDER, player 2 is now at square 45
+
+Press Enter to continue:
+
+Player 1 is on square 91
+Press Enter to Roll:
+Your roll was: 8
+Moving 2 spaces backward.
+Player 1 is now on square 89
+
+
+Press Enter to continue:
+
+Player 2 is on square 45
+Press Enter to Roll:
+Your roll was: 0
+You got 0, rolling again!
+Press Enter to Roll:
+Your roll was: 0
+You got 0, rolling again!
+Press Enter to Roll:
+Your roll was: 0
+You got 0, rolling again!
+Press Enter to Roll:
+Your roll was: 0
+You got 0, rolling again!
+Press Enter to Roll:
+Your roll was: 3
+Moving 3 spaces forward.
+Player 2 is now on square 48
+
+
+Press Enter to continue:
+
+Player 1 is on square 89
+Press Enter to Roll:
+Your roll was: 3
+Moving 3 spaces forward.
+Player 1 is now on square 92
+
+
+Press Enter to continue:
+
+Player 2 is on square 48
+Press Enter to Roll:
+Your roll was: 3
+Moving 3 spaces forward.
+Player 2 is now on square 51
+
+This Square is a LADDER, player 2 is now at square 72
+
+Press Enter to continue:
+
+Player 1 is on square 92
+Press Enter to Roll:
+Your roll was: 5
+Moving 5 spaces forward.
+Player 1 is now on square 97
+
+
+Press Enter to continue:
+
+Player 2 is on square 72
+Press Enter to Roll:
+Your roll was: 1
+Moving 1 spaces forward.
+Player 2 is now on square 73
+
+
+Press Enter to continue:
+
+Player 1 is on square 97
+Press Enter to Roll:
+Your roll was: 10
+Moving 4 spaces backward.
+Player 1 is now on square 93
+
+
+Press Enter to continue:
+
+Player 2 is on square 73
+Press Enter to Roll:
+Your roll was: 9
+Moving 3 spaces backward.
+Player 2 is now on square 70
+
+This Square is a LADDER, player 2 is now at square 91
+
+Press Enter to continue:
+
+Player 1 is on square 93
+Press Enter to Roll:
+Your roll was: 2
+Moving 2 spaces forward.
+Player 1 is now on square 95
+
+
+Press Enter to continue:
+
+Player 2 is on square 91
+Press Enter to Roll:
+Your roll was: 7
+Moving 1 spaces backward.
+Player 2 is now on square 90
+
+
+Press Enter to continue:
+
+Player 1 is on square 95
+Press Enter to Roll:
+Your roll was: 6
+Moving 6 spaces forward.
+Player 1 is now on square 100
+
+
+Press Enter to continue:
+Congrats, player 1, You've WON!
