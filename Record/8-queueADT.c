@@ -19,6 +19,7 @@ Queue *queue_create(int max_size) {
     q->max_size = max_size;
     q->elems = (int *)calloc(max_size, sizeof(int));
     return q;
+    
 }
 
 bool isEmpty(Queue *q) {
